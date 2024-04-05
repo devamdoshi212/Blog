@@ -29,9 +29,9 @@ const sendErrorProd = (error, res) => {
 };
 
 async function errorHandler(error, req, res, next) {
-  if (process.env.NODE_ENV === "development") {
+  if (process.env.NODE_ENV === "DEVELOPMENT") {
     sendErrorDev(error, res);
-  } else if (process.env.NODE_ENV === "production") {
+  } else if (process.env.NODE_ENV === "PRODUCTION") {
     sendErrorProd(error, res);
   }
 }
