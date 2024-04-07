@@ -4,7 +4,7 @@ import { LoginComponent } from './components/login/login.component';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 import { RegisterComponent } from './components/register/register.component';
 import { ErrorComponent } from './components/error/error.component';
-import { AuthGuardService } from './guards/auth.guard';
+import authGuard from './guards/auth.guard';
 
 const routes: Routes = [
   {
@@ -26,13 +26,13 @@ const routes: Routes = [
   },
   {
     path: 'admin',
-    canActivate: [AuthGuardService],
+    canActivate: [authGuard],
     loadChildren: () =>
       import('./modules/admin/admin.module').then((a) => a.AdminModule),
   },
   {
     path: 'user',
-    canActivate: [AuthGuardService],
+    canActivate: [authGuard('user')],
     loadChildren: () =>
       import('./modules/user/user.module').then((u) => u.UserModule),
   },

@@ -6,9 +6,12 @@ const userSchema = new mongoose.Schema({
   fullname: { type: String, trim: true },
   email: { type: String, unique: true, trim: true },
   phone: String,
-  profile: { type: String, trim: true },
+  profile: {
+    public_id: { type: String, trim: true },
+    public_url: { type: String, trim: true },
+  },
   password: String,
-  interests: [{ type: mongoose.SchemaTypes.ObjectId, ref: "categories"}],
+  interests: [{ type: mongoose.SchemaTypes.ObjectId, ref: "categories" }],
   is_active: { type: Number, default: 1 },
 });
 const usersModel = mongoose.model("users", userSchema);

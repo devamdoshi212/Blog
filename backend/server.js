@@ -1,4 +1,5 @@
 require("dotenv").config();
+
 const express = require("express");
 const cors = require("cors");
 const {
@@ -12,6 +13,7 @@ const { dbConnect } = require("./utils/database-utils");
 const adminRoutes = require("./routes/admin-routes");
 const userRoutes = require("./routes/user-routes");
 const { login } = require("./controllers/common-controller");
+const { uploadFile } = require("./utils/upload-files-utils");
 
 const app = express();
 
@@ -31,6 +33,14 @@ app.all("*", (req, res, next) => {
 });
 
 app.use(errorHandler);
+
+uploadFile("C:/Users/devam/Downloads/Happy Birthday! Rishi.jpg")
+  .then((result) => {
+    console.log("File uploaded successfully:", result);
+  })
+  .catch((error) => {
+    console.error("Error uploading file:", error);
+  });
 
 dbConnect()
   .then(() => {
