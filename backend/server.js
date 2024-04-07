@@ -12,8 +12,8 @@ const { dbConnect } = require("./utils/database-utils");
 
 const adminRoutes = require("./routes/admin-routes");
 const userRoutes = require("./routes/user-routes");
-const { login } = require("./controllers/common-controller");
-const { uploadFile } = require("./utils/upload-files-utils");
+const { login, signup } = require("./controllers/common-controller");
+const { multerConfig } = require("./utils/upload-files-utils");
 
 const app = express();
 
@@ -24,6 +24,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(interceptor);
 
 app.post("/login", asyncRouteHandler(login));
+app.post("/signup", multerConfig.single("profileImage"),asyncRouteHandler(signup));
 
 app.use("/admin", adminRoutes);
 app.use("/user", userRoutes);
@@ -33,14 +34,6 @@ app.all("*", (req, res, next) => {
 });
 
 app.use(errorHandler);
-
-uploadFile("C:/Users/devam/Downloads/Happy Birthday! Rishi.jpg")
-  .then((result) => {
-    console.log("File uploaded successfully:", result);
-  })
-  .catch((error) => {
-    console.error("Error uploading file:", error);
-  });
 
 dbConnect()
   .then(() => {
