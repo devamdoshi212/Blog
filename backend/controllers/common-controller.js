@@ -11,7 +11,7 @@ async function signup(req, res, next) {
     throw new CustomError("Invalid Request", 400);
   }
 
-  const user = await userModel.findOne({ username });
+  const user = await userModel.findOne({ username, is_active: 1 });
   if (user) {
     throw new CustomError("Username already exists", 400);
   }
