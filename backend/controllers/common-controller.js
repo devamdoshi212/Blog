@@ -18,7 +18,11 @@ async function signup(req, res, next) {
 
   let profileImage = {};
   if (req.file) {
-    const result = await uploadFile( req.file.buffer, req.file.originalname, "profile-images");
+    const result = await uploadFile(
+      req.file.buffer,
+      req.file.originalname,
+      "profile-images"
+    );
     profileImage.public_id = result.public_id;
     profileImage.public_url = result.secure_url;
   }
@@ -39,13 +43,13 @@ async function signup(req, res, next) {
 }
 
 async function login(req, res, next) {
-  const { role, username, password } = req.body;
-  if (!role || !username || !password) {
+  const { role, email, password } = req.body;
+  if (!role || !email || !password) {
     throw new CustomError("Invalid Request", 400);
   }
 
   const user = await userModel.findOne({
-    username,
+    email,
     password: md5(password),
     role,
     is_active: 1,
@@ -54,7 +58,7 @@ async function login(req, res, next) {
     throw new CustomError("Invalid Credentials", 400);
   }
   const token = jwt.sign(
-    { _id: user._id, role, username },
+    { _id: user._id, role, email },
     process.env.JWT_SECRET,
     { expiresIn: "1d" }
   );

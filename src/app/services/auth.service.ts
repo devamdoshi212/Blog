@@ -1,26 +1,25 @@
 import { Injectable } from '@angular/core';
-
+import { MyHttpService } from './http.service';
+import { map, Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private isAuthenticat: boolean = true;
+  constructor(private http: MyHttpService) {}
 
-  constructor() {}
-
-  isAuthenticated(): boolean {
-    return this.isAuthenticat;
+  login(data: any): Observable<any> {
+    return this.http.fetchPost('login', data).pipe(
+      map((data: any) => {
+        if (data && data.success) {
+          localStorage.setItem('token', data.data.token);
+          return data;
+        } else {
+          localStorage.removeItem('token');
+          return data;
+        }
+      })
+    );
   }
 
-  login(username: string, password: string): void {
-    if (username === 'user' && password === 'password') {
-      this.isAuthenticat = true;
-    } else {
-      this.isAuthenticat = false;
-    }
-  }
-
-  logout(): void {
-    this.isAuthenticat = false;
-  }
+  logout(): void {}
 }
