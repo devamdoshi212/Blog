@@ -14,7 +14,7 @@ const blogSchema = new mongoose.Schema({
     },
   ],
   comments: [
-    { type: mongoose.SchemaTypes.ObjectId, ref: "comments", required: true },
+    { type: mongoose.SchemaTypes.ObjectId, ref: "comments" },
   ],
   is_public: { type: Number, default: 1 },
   is_active: { type: Number, default: 1 },

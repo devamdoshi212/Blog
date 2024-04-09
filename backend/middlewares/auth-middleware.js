@@ -13,7 +13,7 @@ function authMiddleware(role) {
 		try {
 			userData = jwt.verify(token, process.env.JWT_SECRET);
 			console.log('\x1b[32m%s\x1b[0m', '{');
-			console.log('\x1b[34m%s\x1b[0m', '  username : ' + userData.username);
+			console.log('\x1b[34m%s\x1b[0m', '  email : ' + userData.email);
 			console.log('\x1b[32m%s\x1b[0m', '}');
 		} catch (error) {
 			err405(res);
