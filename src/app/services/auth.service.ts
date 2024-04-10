@@ -33,6 +33,7 @@ export class AuthService {
 
   logout(): void {
     localStorage.removeItem('token');
+    localStorage.removeItem('role');
   }
 
   getToken(): string {
@@ -41,5 +42,11 @@ export class AuthService {
 
   setToken(token: string): void {
     localStorage.setItem('token', token);
+  }
+  getRole(): string {
+    return localStorage.getItem('role') ?? '';
+  }
+  setRole(role: string): void {
+    localStorage.setItem('role', role);
   }
 }
