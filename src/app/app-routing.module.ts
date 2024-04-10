@@ -26,13 +26,13 @@ const routes: Routes = [
   },
   {
     path: 'admin',
-    canActivate: [authGuard],
+    canActivate: [authGuard('ADMIN')],
     loadChildren: () =>
       import('./modules/admin/admin.module').then((a) => a.AdminModule),
   },
   {
     path: 'user',
-    canActivate: [authGuard('user')],
+    canActivate: [authGuard('USER')],
     loadChildren: () =>
       import('./modules/user/user.module').then((u) => u.UserModule),
   },

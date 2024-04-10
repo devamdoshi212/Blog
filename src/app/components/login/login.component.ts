@@ -13,7 +13,10 @@ export class LoginComponent implements OnInit {
     private fb: FormBuilder,
     private auth: AuthService,
     private router: Router
-  ) {}
+  ) {
+    // if(this.auth.getToken()){
+    // }
+  }
   ngOnInit(): void {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],

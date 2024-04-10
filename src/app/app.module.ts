@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { MatIconModule } from '@angular/material/icon';
@@ -13,6 +13,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { ErrorComponent } from './components/error/error.component';
 import { AuthService } from './services/auth.service';
 import { CustomButtonComponent } from './components/custom-button/custom-button.component';
+import { AuthInterceptor } from './guards/auth.interceptor';
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,7 +30,11 @@ import { CustomButtonComponent } from './components/custom-button/custom-button.
     MatIconModule,
     ReactiveFormsModule,
   ],
-  providers: [AuthService, provideAnimationsAsync()],
+  providers: [
+    AuthService,
+    provideAnimationsAsync(),
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
