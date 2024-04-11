@@ -1,28 +1,41 @@
-<div class="bg-gray-100 h-screen w-64 flex flex-col">
-    <div class="py-4 px-6">
-        <p class="text-3xl font-semibold">Blog App</p>
-    </div>
+<div class="bg-gray-800 p-5 h-screen flex flex-col">
+  <div class="py-4 px-6">
+    <p class="text-3xl font-medium text-white">Blog App</p>
+  </div>
 
-    <div class="mt-6 flex-1">
-        <a href="#" class="flex items-center py-2 px-4 mb-4 text-lg text-gray-700 hover:bg-gray-200">
-            <img src="pngwing.com.png" alt="Home" class="w-6 h-6 mr-2">
-            Home
-        </a>
-        <a href="#" class="flex items-center py-2 px-4 mb-4 text-lg text-gray-700 hover:bg-gray-200">
-            <img src="explore-icon.png" alt="Explore" class="w-6 h-6 mr-2">
-            Explore
-        </a>
-        <a href="#" class="flex items-center py-2 px-4 mb-4  text-lg text-gray-700 hover:bg-gray-200">
-            <img src="notification-icon.png" alt="Notifications" class="w-6 h-6 mr-2">
-            Notifications
-        </a>
-        <a href="#" class="flex items-center py-2 px-4 mb-4  text-lg text-gray-700 hover:bg-gray-200">
-            <img src="messages-icon.png" alt="Messages" class="w-6 h-6 mr-2">
-            Messages
-        </a>
-    </div>
+  <div class="mt-6 flex-1">
+    <a
+      [routerLink]=""
+      class="flex gap-1 items-center py-2 px-4 mb-4 text-lg text-white hover:bg-gray-700 rounded-md"
+    >
+      <!-- <img src="pngwing.com.png" alt="Home" class="w-6 h-6 mr-2" /> -->
+      <!-- <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="home"></mat-icon> -->
+      <div class="h-6">
+        <mat-icon>home</mat-icon>
+      </div>
+      Home
+    </a>
+    <a
+      [routerLink]=""
+      class="flex items-center py-2 px-4 mb-4 text-lg text-white hover:bg-gray-700 rounded-md"
+    >
+      Explore
+    </a>
+    <a
+      [routerLink]=""
+      class="flex items-center py-2 px-4 mb-4 text-lg text-white hover:bg-gray-700 rounded-md"
+    >
+      Notifications
+    </a>
+    <a
+      [routerLink]=""
+      class="flex items-center py-2 px-4 mb-4 text-lg text-white hover:bg-gray-700 rounded-md"
+    >
+      Messages
+    </a>
+  </div>
 
-    <div class="py-4 px-6 border-t border-gray-200">
-        <a href="#" class="text-lg text-gray-700">Settings</a>
-    </div>
+  <div class="py-4 px-6 border-t border-gray-200">
+    <button (click)="openDialog()" class="text-lg text-white">Logout</button>
+  </div>
 </div>

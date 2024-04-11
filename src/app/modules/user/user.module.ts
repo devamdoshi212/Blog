@@ -5,7 +5,8 @@ import { CommonModule } from '@angular/common';
 import { UserRoutingModule } from './user-routing.module';
 import { ProfileComponent } from './components/profile/profile.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
-
+import { MatIconModule } from '@angular/material/icon';
+import { MatDialogModule } from '@angular/material/dialog';
 @NgModule({
   declarations: [
     DashboardComponent,
@@ -13,6 +14,6 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
     ProfileComponent,
     SidebarComponent,
   ],
-  imports: [CommonModule, UserRoutingModule],
+  imports: [CommonModule, UserRoutingModule, MatIconModule, MatDialogModule],
 })
 export class UserModule {}
