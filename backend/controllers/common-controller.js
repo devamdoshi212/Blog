@@ -6,8 +6,8 @@ const { ok200 } = require("../utils/response-utils");
 const { uploadFile } = require("../utils/upload-files-utils");
 
 async function signup(req, res, next) {
-  const { role, username, fullname, email, phone, password } = req.body;
-  if (!role || !username || !fullname || !email || !password || !phone) {
+  const { role, username, fullname, email, password } = req.body;
+  if (!role || !username || !fullname || !email || !password) {
     throw new CustomError("Invalid Request", 400);
   }
 
@@ -32,7 +32,7 @@ async function signup(req, res, next) {
     username,
     fullname,
     email,
-    phone,
+    // phone,
     password: md5(password),
   });
 

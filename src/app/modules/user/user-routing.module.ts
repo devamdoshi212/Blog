@@ -2,6 +2,9 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { HomeComponent } from './components/home/home.component';
+import { PersonalBlogsComponent } from './components/personal-blogs/personal-blogs.component';
+import { BookmarkComponent } from './components/bookmark/bookmark.component';
+import { ProfileDetailComponent } from './components/profile-detail/profile-detail.component';
 
 const routes: Routes = [
   {
@@ -11,6 +14,18 @@ const routes: Routes = [
       {
         path: 'dashboard',
         component: HomeComponent,
+      },
+      {
+        path: 'blogs',
+        component: PersonalBlogsComponent,
+      },
+      {
+        path: 'bookmark',
+        component: BookmarkComponent,
+      },
+      {
+        path: 'profile',
+        component: ProfileDetailComponent,
       },
       {
         path: '',

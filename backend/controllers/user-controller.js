@@ -8,13 +8,13 @@ const { uploadFile } = require("../utils/upload-files-utils");
 
 async function dashboard(req, res, next) {
   const userData = res.locals.userData;
-  
+  const user = await usersModel.findOne({ _id: userData._id });
   const blogsCount = await blogsModel.countDocuments({
     author: new mongoose.Types.ObjectId(userData._id),
     is_active: 1,
   });
 
-  ok200(res, { blogsCount });
+  ok200(res, { blogsCount, user });
 }
 
 async function addInterest(req, res, next) {
@@ -29,7 +29,7 @@ async function addInterest(req, res, next) {
     { _id: userData._id, is_active: 1 },
     { $addToSet: { interests: { $each: interestArr } } }
   );
-  
+
   ok200(res);
 }
 

@@ -1,37 +1,19 @@
 <div class="bg-gray-800 p-5 h-screen flex flex-col">
   <div class="py-4 px-6">
-    <p class="text-3xl font-medium text-white">Blog App</p>
+    <p class="text-3xl font-medium text-white">Blog</p>
   </div>
 
   <div class="mt-6 flex-1">
     <a
-      [routerLink]=""
+      routerLink="/user/dashboard"
+      routerLinkActive="bg-gray-900"
+      [routerLinkActiveOptions]="{ exact: true }"
       class="flex gap-1 items-center py-2 px-4 mb-4 text-lg text-white hover:bg-gray-700 rounded-md"
     >
-      <!-- <img src="pngwing.com.png" alt="Home" class="w-6 h-6 mr-2" /> -->
-      <!-- <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="home"></mat-icon> -->
       <div class="h-6">
         <mat-icon>home</mat-icon>
       </div>
       Home
-    </a>
-    <a
-      [routerLink]=""
-      class="flex items-center py-2 px-4 mb-4 text-lg text-white hover:bg-gray-700 rounded-md"
-    >
-      Explore
-    </a>
-    <a
-      [routerLink]=""
-      class="flex items-center py-2 px-4 mb-4 text-lg text-white hover:bg-gray-700 rounded-md"
-    >
-      Notifications
-    </a>
-    <a
-      [routerLink]=""
-      class="flex items-center py-2 px-4 mb-4 text-lg text-white hover:bg-gray-700 rounded-md"
-    >
-      Messages
     </a>
   </div>
 
