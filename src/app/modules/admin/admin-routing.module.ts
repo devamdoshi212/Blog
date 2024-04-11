@@ -9,12 +9,12 @@ const routes: Routes = [
     component: DashboardComponent,
     children: [
       {
-        path: 'home',
+        path: 'dashboard',
         component: HomeComponent,
       },
       {
         path: '',
-        redirectTo: '/admin/home',
+        redirectTo: '/admin/dashboard',
         pathMatch: 'full',
       },
     ],

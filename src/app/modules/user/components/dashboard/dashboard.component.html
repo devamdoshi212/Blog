@@ -1,2 +1,7 @@
-<router-outlet></router-outlet>
-<h1>User Dashboard</h1>
+<div class="flex">
+  <div class="w-2/12"><app-sidebar /></div>
+  <div class="w-7/12">
+    <router-outlet></router-outlet>
+  </div>
+  <div class="w-3/12"><app-profile /></div>
+</div>
