@@ -8,12 +8,19 @@ const {
   getInterests,
   getCategories,
   createBlog,
+  addProfileImage,
+  dashboard,
 } = require("../controllers/user-controller");
+const { multerConfig } = require("../utils/upload-files-utils");
 
 const router = express.Router();
 
 router.use(authMiddleware("USER"));
 router.get("/verify", asyncRouteHandler(verify));
+
+router.get("/dashboard", asyncRouteHandler(dashboard));
+
+router.post("/profileImage", multerConfig.single("profileImage"), asyncRouteHandler(addProfileImage));
 
 router.get("/category", asyncRouteHandler(getCategories));
 
