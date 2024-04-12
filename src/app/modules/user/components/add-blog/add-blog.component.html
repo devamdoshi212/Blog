@@ -1,1 +1,33 @@
-<p>add-blog works!</p>
+<div class="container mx-auto px-4 py-8">
+  <div class="mb-4">
+    <label class="block text-white">Title</label>
+    <input
+      class="block text-black w-full mt-1 p-2 border border-gray-300 rounded-md"
+      placeholder="Enter title for your blog"
+    />
+  </div>
+
+  <div class="mb-4">
+    <label class="block text-white">Description</label>
+    <textarea
+      class="block text-black w-full mt-1 p-2 border border-gray-300 rounded-md"
+      placeholder="Write a brief description about your blog"
+    ></textarea>
+  </div>
+
+  <div class="category-section">
+    <mat-form-field class="w-full">
+      <mat-label>Category</mat-label>
+      <mat-select multiple>
+        <mat-option *ngFor="let category of categories" [value]="category">{{
+          category
+        }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div class="editor-section">
+    <div id="toolbar-container"></div>
+    <div id="editor"></div>
+  </div>
+</div>

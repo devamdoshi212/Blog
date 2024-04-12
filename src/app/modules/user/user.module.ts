@@ -13,6 +13,9 @@ import { ProfileDetailComponent } from './components/profile-detail/profile-deta
 import { AddBlogComponent } from './components/add-blog/add-blog.component';
 import { AddInterestComponent } from './components/add-interest/add-interest.component';
 import { BlogCardComponent } from './components/blog-card/blog-card.component';
+import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatSelectModule } from '@angular/material/select';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { QuillModule } from 'ngx-quill';
 @NgModule({
   declarations: [
@@ -32,6 +35,11 @@ import { QuillModule } from 'ngx-quill';
     UserRoutingModule,
     MatIconModule,
     MatDialogModule,
+    FormControl,
+    FormsModule,
+    ReactiveFormsModule,
+    MatSelectModule,
+    MatFormFieldModule,
     QuillModule.forRoot(),
   ],
 })
