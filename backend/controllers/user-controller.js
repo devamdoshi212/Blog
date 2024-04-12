@@ -93,6 +93,83 @@ async function createBlog(req, res, next) {
   ok200(res);
 }
 
+async function getBlogs(req, res, next) {
+  const userData = res.locals.userData;
+
+  const blogs = await blogsModel.aggregate([
+    {
+      $match: {
+        author: new mongoose.Types.ObjectId(userData._id),
+        is_active: 1,
+      },
+    },
+    {
+      $lookup: {
+        from: "categories",
+        localField: "category",
+        foreignField: "_id",
+        as: "category",
+        pipeline: [{ $project: { name: 1 } }],
+      },
+    },
+  ]);
+
+  ok200(res, { blogs });
+}
+
+async function getAllPublicBlogs(req, res, next) {
+  const userData = res.locals.userData;
+  const user = await usersModel.aggregate([
+    { $match: { _id: new mongoose.Types.ObjectId(userData._id) } },
+    {
+      $lookup: {
+        from: "categories",
+        localField: "interests",
+        foreignField: "_id",
+        as: "interests",
+        pipeline: [{ $project: { _id: 1 } }],
+      },
+    },
+    { $project: { interests: 1 } },
+  ]);
+
+  const interests = user[0].interests.map((interest) => interest._id);
+
+  const blogs = await blogsModel.aggregate([
+    {
+      $match: {
+        category: { $in: interests },
+        author: { $ne: new mongoose.Types.ObjectId(userData._id) },
+        is_public: 1,
+        is_active: 1,
+      },
+    },
+    {
+      $lookup: {
+        from: "users",
+        localField: "author",
+        foreignField: "_id",
+        as: "author",
+        pipeline: [
+          { $project: { username: 1, fullname: 1, email: 1, profile: 1 } },
+        ],
+      },
+    },
+    {
+      $lookup: {
+        from: "categories",
+        localField: "category",
+        foreignField: "_id",
+        as: "category",
+        pipeline: [{ $project: { name: 1 } }],
+      },
+    },
+    { $unwind: "$author" },
+  ]);
+
+  ok200(res, { blogs });
+}
+
 async function addProfileImage(req, res, next) {
   if (!req.file) {
     throw new CustomError("Invalid Request", 400);
@@ -123,5 +200,7 @@ module.exports = {
   getInterests,
   getCategories,
   createBlog,
+  getBlogs,
+  getAllPublicBlogs,
   addProfileImage,
 };

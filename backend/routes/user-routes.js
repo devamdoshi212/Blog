@@ -10,6 +10,8 @@ const {
   createBlog,
   addProfileImage,
   dashboard,
+  getBlogs,
+  getAllPublicBlogs,
 } = require("../controllers/user-controller");
 const { multerConfig } = require("../utils/upload-files-utils");
 
@@ -29,5 +31,7 @@ router.get("/interest", asyncRouteHandler(getInterests));
 router.delete("/interest/:id", asyncRouteHandler(removeInterest));
 
 router.post("/blog", asyncRouteHandler(createBlog));
+router.get("/blog", asyncRouteHandler(getBlogs));
+router.get("/blog/public", asyncRouteHandler(getAllPublicBlogs));
 
 module.exports = router;
