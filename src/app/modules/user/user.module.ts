@@ -13,6 +13,10 @@ import { ProfileDetailComponent } from './components/profile-detail/profile-deta
 import { AddBlogComponent } from './components/add-blog/add-blog.component';
 import { AddInterestComponent } from './components/add-interest/add-interest.component';
 import { BlogCardComponent } from './components/blog-card/blog-card.component';
+import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatSelectModule } from '@angular/material/select';
+import { MatFormFieldModule } from '@angular/material/form-field';
+
 @NgModule({
   declarations: [
     DashboardComponent,
@@ -26,6 +30,15 @@ import { BlogCardComponent } from './components/blog-card/blog-card.component';
     AddInterestComponent,
     BlogCardComponent,
   ],
-  imports: [CommonModule, UserRoutingModule, MatIconModule, MatDialogModule],
+  imports: [
+    CommonModule,
+    UserRoutingModule,
+    MatIconModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    FormsModule,
+    ReactiveFormsModule,
+  ],
 })
 export class UserModule {}
