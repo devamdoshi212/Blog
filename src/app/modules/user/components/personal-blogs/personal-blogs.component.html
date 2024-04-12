@@ -1,1 +1,3 @@
-<p>personal-blogs works!</p>
+<div *ngFor="let blog of blogs">
+  <app-blog-card [blog]="blog" [personal]="false"></app-blog-card>
+</div>

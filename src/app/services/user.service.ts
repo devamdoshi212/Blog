@@ -79,4 +79,8 @@ export class UserService {
   postBlog(data: any): Observable<any> {
     return this.http.fetchPost('user/blog', data);
   }
+
+  getPersonalBlog(): Observable<any> {
+    return this.http.fetchGet('user/blog');
+  }
 }
