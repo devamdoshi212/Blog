@@ -10,10 +10,32 @@
       [routerLinkActiveOptions]="{ exact: true }"
       class="flex gap-1 items-center py-2 px-4 mb-4 text-lg text-white hover:bg-gray-700 rounded-md"
     >
-      <div class="h-6">
+      <span class="inline-flex items-center">
         <mat-icon>home</mat-icon>
-      </div>
+      </span>
       Home
+    </a>
+    <a
+      routerLink="/user/add-blog"
+      routerLinkActive="bg-gray-900"
+      [routerLinkActiveOptions]="{ exact: true }"
+      class="flex gap-1 items-center py-2 px-4 mb-4 text-lg text-white hover:bg-gray-700 rounded-md"
+    >
+      <span class="inline-flex items-center">
+        <mat-icon>add_circle</mat-icon>
+      </span>
+      Add Blog
+    </a>
+    <a
+      routerLink="/user/add-interest"
+      routerLinkActive="bg-gray-900"
+      [routerLinkActiveOptions]="{ exact: true }"
+      class="flex gap-1 items-center py-2 px-4 mb-4 text-lg text-white hover:bg-gray-700 rounded-md"
+    >
+      <span class="inline-flex items-center">
+        <mat-icon>favorite</mat-icon>
+      </span>
+      Add Interest
     </a>
   </div>
 

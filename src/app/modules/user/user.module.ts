@@ -10,6 +10,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { PersonalBlogsComponent } from './components/personal-blogs/personal-blogs.component';
 import { BookmarkComponent } from './components/bookmark/bookmark.component';
 import { ProfileDetailComponent } from './components/profile-detail/profile-detail.component';
+import { AddBlogComponent } from './components/add-blog/add-blog.component';
+import { AddInterestComponent } from './components/add-interest/add-interest.component';
 @NgModule({
   declarations: [
     DashboardComponent,
@@ -19,6 +21,8 @@ import { ProfileDetailComponent } from './components/profile-detail/profile-deta
     PersonalBlogsComponent,
     BookmarkComponent,
     ProfileDetailComponent,
+    AddBlogComponent,
+    AddInterestComponent,
   ],
   imports: [CommonModule, UserRoutingModule, MatIconModule, MatDialogModule],
 })
