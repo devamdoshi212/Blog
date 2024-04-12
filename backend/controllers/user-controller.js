@@ -74,19 +74,21 @@ async function getCategories(req, res, next) {
 
 async function createBlog(req, res, next) {
   const { data } = req.body;
-  const { title, content, categories, is_public } = JSON.parse(data);
-  if (!title || !content || categories.length === 0 || is_public == undefined) {
+
+  const { title, content, category, is_public } = JSON.parse(data);
+  console.log(is_public);
+  if (!title || !content || category.length === 0 || is_public == undefined) {
     throw new CustomError("Invalid Request", 400);
   }
 
-  const categoriesArr = categories.map((id) => new mongoose.Types.ObjectId(id));
+  const categoryArr = category.map((id) => new mongoose.Types.ObjectId(id));
 
   const userData = res.locals.userData;
   const blog = new blogsModel({
     title,
     content,
     author: new mongoose.Types.ObjectId(userData._id),
-    category: categoriesArr,
+    category: categoryArr,
   });
   await blog.save();
 

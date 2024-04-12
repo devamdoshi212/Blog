@@ -5,6 +5,9 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { CommonService } from '../../../../services/common.service';
+import category from '../../../../models/category';
+import { UserService } from '../../../../services/user.service';
 
 @Component({
   selector: 'app-add-blog',
@@ -12,8 +15,18 @@ import {
 })
 export class AddBlogComponent {
   addBlogForm!: FormGroup;
+  categories: category[] = [];
+  fileName: string | undefined;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private common: CommonService,
+    private user: UserService
+  ) {
+    this.common.getCategory().subscribe((data) => {
+      this.categories = this.common.category;
+    });
+  }
 
   ngOnInit(): void {
     this.addBlogForm = this.fb.group({
@@ -24,21 +37,28 @@ export class AddBlogComponent {
       is_Public: [1, Validators.required],
     });
   }
-  categories: string[] = [
-    'Extra cheese',
-    'Mushroom',
-    'Onion',
-    'Pepperoni',
-    'Sausage',
-    'Tomato',
-  ];
-  fileName: string | undefined;
 
   onFileSelected(event: any): void {
     const file: File = event.target.files[0];
     this.fileName = file ? file.name : undefined;
   }
   submitForm() {
-    console.log(this.addBlogForm.value);
+    if (this.addBlogForm.valid) {
+      this.user
+        .postBlog({
+          data: JSON.stringify({
+            ...this.addBlogForm.value,
+            is_public: this.addBlogForm.get('is_Public') ? 1 : 0,
+          }),
+        })
+        .subscribe((data) => {
+          if (data.success) {
+            this.addBlogForm.reset();
+            this.user.getProfile();
+          } else {
+            console.log(data);
+          }
+        });
+    }
   }
 }
