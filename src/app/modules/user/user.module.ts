@@ -12,6 +12,7 @@ import { BookmarkComponent } from './components/bookmark/bookmark.component';
 import { ProfileDetailComponent } from './components/profile-detail/profile-detail.component';
 import { AddBlogComponent } from './components/add-blog/add-blog.component';
 import { AddInterestComponent } from './components/add-interest/add-interest.component';
+import { BlogCardComponent } from './components/blog-card/blog-card.component';
 @NgModule({
   declarations: [
     DashboardComponent,
@@ -23,6 +24,7 @@ import { AddInterestComponent } from './components/add-interest/add-interest.com
     ProfileDetailComponent,
     AddBlogComponent,
     AddInterestComponent,
+    BlogCardComponent,
   ],
   imports: [CommonModule, UserRoutingModule, MatIconModule, MatDialogModule],
 })
