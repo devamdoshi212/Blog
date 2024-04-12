@@ -16,6 +16,17 @@ import { BlogCardComponent } from './components/blog-card/blog-card.component';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { COMMA, ENTER } from '@angular/cdk/keycodes';
+import { Component, ElementRef, ViewChild, inject } from '@angular/core';
+import {
+  MatAutocompleteSelectedEvent,
+  MatAutocompleteModule,
+} from '@angular/material/autocomplete';
+import { MatChipInputEvent, MatChipsModule } from '@angular/material/chips';
+import { Observable } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
+import { AsyncPipe } from '@angular/common';
+import { LiveAnnouncer } from '@angular/cdk/a11y';
 
 @NgModule({
   declarations: [
@@ -39,6 +50,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     MatSelectModule,
     FormsModule,
     ReactiveFormsModule,
+    MatChipsModule,
+    MatAutocompleteModule,
+    AsyncPipe,
   ],
 })
 export class UserModule {}
