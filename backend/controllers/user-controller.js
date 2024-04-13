@@ -86,6 +86,7 @@ async function createBlog(req, res, next) {
   const blog = new blogsModel({
     title,
     content,
+    is_public,
     author: new mongoose.Types.ObjectId(userData._id),
     category: categoryArr,
     is_public,
