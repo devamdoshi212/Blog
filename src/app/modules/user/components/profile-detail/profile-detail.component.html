@@ -1,1 +1,45 @@
-<p>profile-detail works!</p>
+<div class="flex justify-center items-start min-h-screen">
+    <div class="w-full max-w-md bg-transparent p-8">
+      <div class="text-3xl font-bold text-center mb-4">User Profile</div>
+  
+      <form id="profileForm">
+       
+        <label for="image" class="block w-48 h-48 mx-auto mb-4 rounded-full overflow-hidden">
+          <img src="./af1d3ee27865dcd4f070d0a36d7453d7.jpeg" alt="Default Image" class="w-full h-full object-cover">
+        </label>
+        <input
+          type="file"
+          id="image"
+          name="image"
+          class="hidden"
+          
+        />
+  
+        <label for="username" class="block text-xl font-medium mb-2">Username</label>
+        <input
+          type="text"
+          id="username"
+          name="username"
+          class="w-full px-4 py-2 text-gray-900 bg-gray-200 border-2 rounded-md focus:outline-none focus:bg-white focus:border-gray-400 mb-4"
+          value="JohnDoe"
+        />
+  
+        <label for="fullname" class="block text-xl font-medium mb-2">Full Name</label>
+        <input
+          type="text"
+          id="fullname"
+          name="fullname"
+          class="w-full px-4 py-2 text-gray-900 bg-gray-200 border-2 rounded-md focus:outline-none focus:bg-white focus:border-gray-400 mb-4"
+          value="John Doe"
+        />
+  
+        <button
+          type="submit"
+          class="w-full px-4 py-2 h-11 bg-indigo-600 text-white font-medium text-sm rounded-md shadow-md hover:bg-indigo-700 focus:outline-none focus:ring focus:ring-indigo-300 focus:border-indigo-700 mb-2"
+        >
+          Update Profile
+        </button>
+      </form>
+    </div>
+  </div>
+  
