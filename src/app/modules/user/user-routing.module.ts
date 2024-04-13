@@ -7,6 +7,7 @@ import { BookmarkComponent } from './components/bookmark/bookmark.component';
 import { ProfileDetailComponent } from './components/profile-detail/profile-detail.component';
 import { AddBlogComponent } from './components/add-blog/add-blog.component';
 import { AddInterestComponent } from './components/add-interest/add-interest.component';
+import { EditBlogComponent } from './components/edit-blog/edit-blog.component';
 
 const routes: Routes = [
   {
@@ -36,6 +37,10 @@ const routes: Routes = [
       {
         path: 'add-interest',
         component: AddInterestComponent,
+      },
+      {
+        path: 'edit-blog/:id',
+        component: EditBlogComponent,
       },
       {
         path: '',

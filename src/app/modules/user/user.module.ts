@@ -27,6 +27,7 @@ import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { AsyncPipe } from '@angular/common';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
+import { EditBlogComponent } from './components/edit-blog/edit-blog.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { LiveAnnouncer } from '@angular/cdk/a11y';
     AddBlogComponent,
     AddInterestComponent,
     BlogCardComponent,
+    EditBlogComponent,
   ],
   imports: [
     CommonModule,

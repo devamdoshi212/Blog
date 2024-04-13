@@ -94,6 +94,7 @@
     >
       <div class="flex items-center">
         <button
+          [routerLink]="'/user/edit-blog/' + blog._id"
           class="text-sm font-medium text-white mr-4 hover:text-blue-500 flex items-center"
         >
           <span class="mr-1">
@@ -102,6 +103,7 @@
           Edit
         </button>
         <button
+          (click)="openDeleteDialog()"
           class="text-sm font-medium text-white mr-4 hover:text-red-500 flex items-center"
         >
           <span class="mr-1">

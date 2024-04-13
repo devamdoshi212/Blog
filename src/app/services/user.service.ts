@@ -75,11 +75,15 @@ export class UserService {
       })
     );
   }
-
+  getSingleBlog(url: any): Observable<any> {
+    return this.http.fetchGet(`user/blog/` + url);
+  }
   postBlog(data: any): Observable<any> {
     return this.http.fetchPost('user/blog', data);
   }
-
+  deleteBlog(data: String): Observable<any> {
+    return this.http.fetchDelete(`user/blog/${data}`, {});
+  }
   getPersonalBlog(): Observable<any> {
     return this.http.fetchGet('user/blog');
   }
