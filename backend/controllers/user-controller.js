@@ -76,7 +76,6 @@ async function createBlog(req, res, next) {
   const { data } = req.body;
 
   const { title, content, category, is_public } = JSON.parse(data);
-  console.log(is_public);
   if (!title || !content || category.length === 0 || is_public == undefined) {
     throw new CustomError("Invalid Request", 400);
   }
@@ -89,9 +88,60 @@ async function createBlog(req, res, next) {
     content,
     author: new mongoose.Types.ObjectId(userData._id),
     category: categoryArr,
+    is_public,
   });
   await blog.save();
 
+  ok200(res);
+}
+
+async function editblog(req, res, next) {
+  const { id } = req.params;
+  if (!mongoose.isValidObjectId(id)) {
+    throw new CustomError("Invalid Request", 400);
+  }
+  const { data } = req.body;
+  const { title, content, category, is_public } = JSON.parse(data);
+  if (!title || !content || category.length === 0 || is_public == undefined) {
+    throw new CustomError("Invalid Request", 400);
+  }
+  const categoryArr = category.map((id) => new mongoose.Types.ObjectId(id));
+
+  const userData = res.locals.userData;
+  const blog = await blogsModel.findOneAndUpdate(
+    {
+      _id: id,
+      author: new mongoose.Types.ObjectId(userData._id),
+      is_active: 1,
+    },
+    {
+      title,
+      content,
+      category: categoryArr,
+      is_public,
+      updated_at: Date.now(),
+    }
+  );
+
+  ok200(res);
+}
+
+async function deleteBlog(req, res, next) {
+  const { id } = req.params;
+  if (!mongoose.isValidObjectId(id)) {
+    throw new CustomError("Invalid Request", 400);
+  }
+  const userData = res.locals.userData;
+  const blog = await blogsModel.findOneAndUpdate(
+    {
+      _id: id,
+      author: new mongoose.Types.ObjectId(userData._id),
+      is_active: 1,
+    },
+    {
+      is_active: 0,
+    }
+  );
   ok200(res);
 }
 
@@ -202,6 +252,8 @@ module.exports = {
   getInterests,
   getCategories,
   createBlog,
+  editblog,
+  deleteBlog,
   getBlogs,
   getAllPublicBlogs,
   addProfileImage,
