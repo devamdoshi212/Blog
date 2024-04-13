@@ -8,6 +8,7 @@ export class HomeComponent {
   blogs: any[] = [];
   constructor(private user: UserService) {
     this.user.getInterestedBlog().subscribe((data) => {
+      console.log(data);
       if (data.success) {
         this.blogs = data.data.blogs;
       }

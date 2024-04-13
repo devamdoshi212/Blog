@@ -45,7 +45,6 @@ export class RegisterComponent implements OnInit {
     if (this.registerForm.invalid) {
       return;
     }
-    console.log(this.registerForm.value);
     this.auth
       .register({ ...this.registerForm.value, role: 'USER' })
       .subscribe((data) => {

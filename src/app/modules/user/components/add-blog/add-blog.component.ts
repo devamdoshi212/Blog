@@ -34,7 +34,7 @@ export class AddBlogComponent {
       content: ['', [Validators.required, Validators.minLength(1)]],
       image: ['', []],
       category: [[], [Validators.required]],
-      is_Public: [1, Validators.required],
+      is_Public: [true, Validators.required],
     });
   }
 
@@ -48,7 +48,7 @@ export class AddBlogComponent {
         .postBlog({
           data: JSON.stringify({
             ...this.addBlogForm.value,
-            is_public: this.addBlogForm.get('is_Public') ? 1 : 0,
+            is_public: this.addBlogForm.get('is_Public')?.value ? 1 : 0,
           }),
         })
         .subscribe((data) => {

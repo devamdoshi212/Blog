@@ -18,7 +18,6 @@ export class AddInterestComponent {
   fetchData(): void {
     this.user.getInterestedCategory().subscribe((data: any) => {
       if (data.success) {
-        console.log(data);
         this.categories = data.data.user.interests;
 
         this.common.getCategory().subscribe((data: category[]) => {
@@ -34,7 +33,6 @@ export class AddInterestComponent {
     this.user
       .addInterestCategory({ interestIds: this.interestIds })
       .subscribe((data) => {
-        console.log(data);
         if (data.success) {
           this.fetchData();
         }
