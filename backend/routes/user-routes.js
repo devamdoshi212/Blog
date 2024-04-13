@@ -14,6 +14,7 @@ const {
   getAllPublicBlogs,
   editblog,
   deleteBlog,
+  getSingleBlog,
 } = require("../controllers/user-controller");
 const { multerConfig } = require("../utils/upload-files-utils");
 
@@ -38,6 +39,7 @@ router.delete("/interest/:id", asyncRouteHandler(removeInterest));
 
 router.post("/blog", asyncRouteHandler(createBlog));
 router.get("/blog", asyncRouteHandler(getBlogs));
+router.get("/blog/:id", asyncRouteHandler(getSingleBlog));
 router.get("/blog/public", asyncRouteHandler(getAllPublicBlogs));
 router.patch("/blog/:id", asyncRouteHandler(editblog));
 router.delete("/blog/:id", asyncRouteHandler(deleteBlog));

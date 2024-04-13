@@ -145,7 +145,55 @@ async function deleteBlog(req, res, next) {
   );
   ok200(res);
 }
+async function getSingleBlog(req, res, next) {
+  const blogId = req.params.id;
 
+  const blog = await blogsModel.aggregate([
+    { $match: { _id: new mongoose.Types.ObjectId(blogId) } },
+    {
+      $lookup: {
+        from: "users",
+        localField: "author",
+        foreignField: "_id",
+        as: "author",
+      },
+    },
+    {
+      $lookup: {
+        from: "categories",
+        localField: "category",
+        foreignField: "_id",
+        as: "category",
+      },
+    },
+    {
+      $lookup: {
+        from: "comments",
+        localField: "comments",
+        foreignField: "_id",
+        as: "comments",
+      },
+    },
+    {
+      $project: {
+        title: 1,
+        content: 1,
+        created_at: 1,
+        updated_at: 1,
+        author: { $arrayElemAt: ["$author", 0] },
+        category: 1,
+        comments: 1,
+        is_public: 1,
+        is_active: 1,
+      },
+    },
+  ]);
+
+  if (blog.length === 0) {
+    throw new CustomError("Blog not found", 400);
+  }
+  ok200(res, blog[0]);
+}
 async function getBlogs(req, res, next) {
   const userData = res.locals.userData;
 
@@ -258,4 +306,5 @@ module.exports = {
   getBlogs,
   getAllPublicBlogs,
   addProfileImage,
+  getSingleBlog,
 };
