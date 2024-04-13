@@ -15,6 +15,7 @@ export class CommonService {
       map((data) => {
         if (data.success) {
           this.category = data.data.categories;
+          return data.data.categories;
         }
       })
     );

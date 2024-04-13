@@ -16,7 +16,6 @@ export class ProfileComponent implements OnInit {
   }
   ngOnInit(): void {
     this.user.profileChange.subscribe((data: string) => {
-      console.log(data);
       this.profile = data;
     });
     this.user.fullnameChange.subscribe(
