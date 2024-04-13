@@ -1,52 +1,49 @@
-<div class="flex flex-col space-x-4">
+<div class="flex flex-col space-y-3">
   <div class="flex flex-col w-full">
-    <div class="font-bold">ADD INTEREST :</div>
-    <form>
-      <mat-form-field class="example-chip-list w-full">
-        <mat-label>Favorite Fruits</mat-label>
-        <mat-chip-grid #chipGrid aria-label="Fruit selection">
-          @for (fruit of fruits; track fruit) {
-          <mat-chip-row (removed)="remove(fruit)">
-            {{ fruit }}
-            <button matChipRemove [attr.aria-label]="'remove ' + fruit">
-              <mat-icon>cancel</mat-icon>
-            </button>
-          </mat-chip-row>
-          }
-        </mat-chip-grid>
-        <input
-          placeholder="New Fruit..."
-          #fruitInput
-          [formControl]="fruitCtrl"
-          [matChipInputFor]="chipGrid"
-          [matAutocomplete]="auto"
-          [matChipInputSeparatorKeyCodes]="eparatorKeysCodes"
-          (matChipInputTokenEnd)="add($event)"
-        />
-        <mat-autocomplete
-          #auto="matAutocomplete"
-          (optionSelected)="selected($event)"
-        >
-          @for (fruit of filteredFruits | async; track fruit) {
-          <mat-option [value]="fruit">{{ fruit }}</mat-option>
-          }
-        </mat-autocomplete>
-      </mat-form-field>
-    </form>
-  </div>
-  <div class="flex flex-col w-full">
-    <div class="font-bold">User's Existing Interests:</div>
-    <div class="flex flex-row flex-wrap items-center space-x-2 mt-2">
+    <div class="font-medium">Your Interested Categories:</div>
+    <div class="flex flex-row flex-wrap items-center">
       <div
-        *ngFor="let fruit of fruits"
-        class="bg-white w-36 h-36 items-center justify-center text-center rounded-lg"
+        *ngFor="let category of categories"
+        class="bg-white w-36 h-auto items-center justify-center text-center rounded-lg m-2"
       >
         <img
-          src="https://res.cloudinary.com/dxjl4x8rw/image/upload/v1712512999/profile-images/rztwetifnflwqsowf7i4.png"
+          src="{{ category.categoryImg.public_url }}"
           alt="Interest Image"
           class="w-20 h-20 rounded-full mx-auto mt-5"
         />
-        <span class="font-medium text-black">{{ fruit }}</span>
+        <span class="font-medium text-black">{{ category.name }}</span>
+        <div>
+          <button
+            (click)="removeCategory(category._id)"
+            class="inline-flex items-center px-6 py-2 mb-2 mt-2 text-sm font-medium text-center text-white bg-blue-900 rounded-lg focus:ring-4 focus:ring-blue-200 hover:bg-blue-800"
+          >
+            Remove
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="flex flex-col w-full">
+    <div class="font-medium">Add Category:</div>
+    <div class="flex flex-row flex-wrap items-center">
+      <div
+        *ngFor="let category of allCategories"
+        class="bg-white w-36 h-auto items-center justify-center text-center rounded-lg m-2"
+      >
+        <img
+          src="{{ category.categoryImg.public_url }}"
+          alt="Interest Image"
+          class="w-20 h-20 rounded-full mx-auto mt-5"
+        />
+        <span class="font-medium text-black">{{ category.name }}</span>
+        <div>
+          <button
+            (click)="addCategory(category._id)"
+            class="inline-flex items-center px-6 py-2 mb-2 mt-2 text-sm font-medium text-center text-white bg-blue-900 rounded-lg focus:ring-4 focus:ring-blue-200 hover:bg-blue-800"
+          >
+            Add
+          </button>
+        </div>
       </div>
     </div>
   </div>

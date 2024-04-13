@@ -14,4 +14,7 @@ export class MyHttpService {
   fetchPost(url: string, data: Object): Observable<any> {
     return this.http.post<any>('http://localhost:9999/' + url, data);
   }
+  fetchDelete(url: string, data: Object): Observable<any> {
+    return this.http.delete<any>('http://localhost:9999/' + url, data);
+  }
 }

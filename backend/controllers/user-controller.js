@@ -59,7 +59,7 @@ async function getInterests(req, res, next) {
         localField: "interests",
         foreignField: "_id",
         as: "interests",
-        pipeline: [{ $project: { name: 1 } }],
+        pipeline: [{ $project: { name: 1, categoryImg: 1 } }],
       },
     },
     { $project: { interests: 1 } },

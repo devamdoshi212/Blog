@@ -89,4 +89,10 @@ export class UserService {
   getInterestedCategory(): Observable<any> {
     return this.http.fetchGet('user/interest');
   }
+  addInterestCategory(data: any): Observable<any> {
+    return this.http.fetchPost('user/interest', data);
+  }
+  removeInterestCategory(data: String): Observable<any> {
+    return this.http.fetchDelete(`user/interest/${data}`, {});
+  }
 }
