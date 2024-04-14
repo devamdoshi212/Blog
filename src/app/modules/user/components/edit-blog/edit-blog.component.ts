@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import category from '../../../../models/category';
 import { CommonService } from '../../../../services/common.service';
 import { UserService } from '../../../../services/user.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-edit-blog',
@@ -19,14 +19,15 @@ export class EditBlogComponent {
   title: any = '';
   content: any = '';
   public: boolean = true;
-  category: category[] = [];
+  category: any[] = [];
   image: any = '';
 
   constructor(
     private fb: FormBuilder,
     private common: CommonService,
     private user: UserService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {
     this.common.getCategory().subscribe((data) => {
       this.categories = this.common.category;
@@ -41,16 +42,20 @@ export class EditBlogComponent {
         this.title = data.data.title;
         this.content = data.data.content;
         this.category = data.data.category;
+        this.category = this.category.map((c) => c._id);
         this.public = data.data.is_public == 1 ? true : false;
-      });
-    });
 
-    this.addBlogForm = this.fb.group({
-      title: [this.title, [Validators.required]],
-      content: [this.content, [Validators.required, Validators.minLength(1)]],
-      image: ['', []],
-      category: [this.category, [Validators.required]],
-      is_Public: [this.public, Validators.required],
+        this.addBlogForm = this.fb.group({
+          title: [this.title, [Validators.required]],
+          content: [
+            this.content,
+            [Validators.required, Validators.minLength(1)],
+          ],
+          image: ['', []],
+          category: [this.category, [Validators.required]],
+          is_Public: [this.public, Validators.required],
+        });
+      });
     });
   }
 
@@ -61,7 +66,7 @@ export class EditBlogComponent {
   submitForm() {
     if (this.addBlogForm.valid) {
       this.user
-        .postBlog({
+        .editBlog(this.blogId, {
           data: JSON.stringify({
             ...this.addBlogForm.value,
             is_public: this.addBlogForm.get('is_Public')?.value ? 1 : 0,
@@ -69,8 +74,7 @@ export class EditBlogComponent {
         })
         .subscribe((data) => {
           if (data.success) {
-            this.addBlogForm.reset();
-            this.user.getProfile();
+            this.router.navigate(['/user/blogs']);
           } else {
             console.log(data);
           }

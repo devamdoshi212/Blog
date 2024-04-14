@@ -17,4 +17,7 @@ export class MyHttpService {
   fetchDelete(url: string, data: Object): Observable<any> {
     return this.http.delete<any>('http://localhost:9999/' + url, data);
   }
+  fetchPatch(url: string, data: Object): Observable<any> {
+    return this.http.patch<any>('http://localhost:9999/' + url, data);
+  }
 }

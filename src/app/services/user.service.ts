@@ -81,8 +81,11 @@ export class UserService {
   postBlog(data: any): Observable<any> {
     return this.http.fetchPost('user/blog', data);
   }
-  deleteBlog(data: String): Observable<any> {
-    return this.http.fetchDelete(`user/blog/${data}`, {});
+  editBlog(url: any, data: any): Observable<any> {
+    return this.http.fetchPatch(`user/blog/${url}`, data);
+  }
+  deleteBlog(url: String): Observable<any> {
+    return this.http.fetchDelete(`user/blog/${url}`, {});
   }
   getPersonalBlog(): Observable<any> {
     return this.http.fetchGet('user/blog');
