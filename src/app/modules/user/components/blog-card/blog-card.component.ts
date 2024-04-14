@@ -22,6 +22,7 @@ export class BlogCardComponent {
       data: {
         title: 'Delete Confirmation',
         description: 'Are you sure you want to proceed?',
+        button: true,
       },
     });
 

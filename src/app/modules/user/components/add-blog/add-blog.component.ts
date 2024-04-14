@@ -8,6 +8,9 @@ import {
 import { CommonService } from '../../../../services/common.service';
 import category from '../../../../models/category';
 import { UserService } from '../../../../services/user.service';
+import { CustomDialogComponent } from '../../../../components/custom-dialog/custom-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-blog',
@@ -21,7 +24,9 @@ export class AddBlogComponent {
   constructor(
     private fb: FormBuilder,
     private common: CommonService,
-    private user: UserService
+    private user: UserService,
+    private dialog: MatDialog,
+    private router: Router
   ) {
     this.common.getCategory().subscribe((data) => {
       this.categories = this.common.category;
@@ -54,11 +59,27 @@ export class AddBlogComponent {
         .subscribe((data) => {
           if (data.success) {
             this.addBlogForm.reset();
-            this.user.getProfile();
+            this.openDialog();
+            this.router.navigate(['/user/blogs']);
           } else {
             console.log(data);
           }
         });
     }
+  }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(CustomDialogComponent, {
+      width: '250px',
+      data: {
+        title: 'Confirmation',
+        description: 'Blog Added Successfully',
+        button: false,
+      },
+    });
+    setTimeout(() => {
+      dialogRef.close();
+    }, 3000);
+    dialogRef.afterClosed().subscribe((result) => {});
   }
 }

@@ -14,6 +14,8 @@ import { ErrorComponent } from './components/error/error.component';
 import { AuthService } from './services/auth.service';
 import { CustomButtonComponent } from './components/custom-button/custom-button.component';
 import { AuthInterceptor } from './guards/auth.interceptor';
+import { CommonModule } from '@angular/common';
+import { CustomDialogComponent } from './components/custom-dialog/custom-dialog.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,6 +23,7 @@ import { AuthInterceptor } from './guards/auth.interceptor';
     RegisterComponent,
     ErrorComponent,
     CustomButtonComponent,
+    CustomDialogComponent,
   ],
   imports: [
     AppRoutingModule,
@@ -29,6 +32,7 @@ import { AuthInterceptor } from './guards/auth.interceptor';
     HttpClientModule,
     MatIconModule,
     ReactiveFormsModule,
+    CommonModule,
   ],
   providers: [
     AuthService,

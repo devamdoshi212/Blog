@@ -8,6 +8,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 export class CustomDialogComponent {
   title: string;
   description: string;
+  button: boolean;
 
   constructor(
     public dialogRef: MatDialogRef<CustomDialogComponent>,
@@ -15,13 +16,14 @@ export class CustomDialogComponent {
   ) {
     this.title = data.title || 'Title';
     this.description = data.description || 'Description';
+    this.button = data.button;
   }
 
   onYesClick(): void {
-    this.dialogRef.close(true); // Pass true when "Yes" button is clicked
+    this.dialogRef.close(true);
   }
 
   onNoClick(): void {
-    this.dialogRef.close(false); // Pass false when "No" button is clicked
+    this.dialogRef.close(false);
   }
 }

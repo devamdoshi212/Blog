@@ -16,6 +16,7 @@ export class SidebarComponent {
       data: {
         title: 'Logout Confirmation',
         description: 'Are you sure you want to proceed?',
+        button: true,
       },
     });
 
