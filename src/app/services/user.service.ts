@@ -91,7 +91,7 @@ export class UserService {
     return this.http.fetchGet('user/blog');
   }
   getInterestedBlog(): Observable<any> {
-    return this.http.fetchGet('user/blog/public');
+    return this.http.fetchGet('user/blogpublic');
   }
   getInterestedCategory(): Observable<any> {
     return this.http.fetchGet('user/interest');

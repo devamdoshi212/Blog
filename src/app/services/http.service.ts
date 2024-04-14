@@ -9,15 +9,15 @@ export class MyHttpService {
   constructor(private http: HttpClient) {}
 
   fetchGet(url: string): Observable<any> {
-    return this.http.get<any>('http://localhost:9999/' + url);
+    return this.http.get<any>('https://blog-xikb.onrender.com/' + url);
   }
   fetchPost(url: string, data: Object): Observable<any> {
-    return this.http.post<any>('http://localhost:9999/' + url, data);
+    return this.http.post<any>('https://blog-xikb.onrender.com/' + url, data);
   }
   fetchDelete(url: string, data: Object): Observable<any> {
-    return this.http.delete<any>('http://localhost:9999/' + url, data);
+    return this.http.delete<any>('https://blog-xikb.onrender.com/' + url, data);
   }
   fetchPatch(url: string, data: Object): Observable<any> {
-    return this.http.patch<any>('http://localhost:9999/' + url, data);
+    return this.http.patch<any>('https://blog-xikb.onrender.com/' + url, data);
   }
 }
