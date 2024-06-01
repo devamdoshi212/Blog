@@ -73,14 +73,22 @@ async function getCategories(req, res, next) {
 }
 
 async function createBlog(req, res, next) {
-  const { data } = req.body;
-
-  const { title, content, category, is_public } = JSON.parse(data);
+  const { title, content, category, is_public } = req.body;
   if (!title || !content || category.length === 0 || is_public == undefined) {
     throw new CustomError("Invalid Request", 400);
   }
+  let image = {};
+  const result = await uploadFile(
+    req.file.buffer,
+    req.file.originalname,
+    "blogs-images"
+  );
+  image.public_id = result.public_id;
+  image.public_url = result.secure_url;
 
-  const categoryArr = category.map((id) => new mongoose.Types.ObjectId(id));
+  const categoryArr = JSON.parse(category).map(
+    (id) => new mongoose.Types.ObjectId(id)
+  );
 
   const userData = res.locals.userData;
   const blog = new blogsModel({
@@ -90,6 +98,7 @@ async function createBlog(req, res, next) {
     author: new mongoose.Types.ObjectId(userData._id),
     category: categoryArr,
     is_public,
+    image,
   });
   await blog.save();
 

@@ -20,7 +20,7 @@ export class AddBlogComponent {
   addBlogForm!: FormGroup;
   categories: category[] = [];
   fileName: string | undefined;
-
+  file: File | null = null;
   constructor(
     private fb: FormBuilder,
     private common: CommonService,
@@ -44,27 +44,40 @@ export class AddBlogComponent {
   }
 
   onFileSelected(event: any): void {
-    const file: File = event.target.files[0];
-    this.fileName = file ? file.name : undefined;
+    this.file = event.target.files[0];
+    if (this.file) {
+      this.fileName = this.file ? this.file.name : '';
+      const formData = new FormData();
+      formData.append('image', this.file);
+      console.log(this.file);
+    }
   }
   submitForm() {
     if (this.addBlogForm.valid) {
-      this.user
-        .postBlog({
-          data: JSON.stringify({
-            ...this.addBlogForm.value,
-            is_public: this.addBlogForm.get('is_Public')?.value ? 1 : 0,
-          }),
-        })
-        .subscribe((data) => {
-          if (data.success) {
-            this.addBlogForm.reset();
-            this.openDialog();
-            this.router.navigate(['/user/blogs']);
-          } else {
-            console.log(data);
-          }
-        });
+      const formData = new FormData();
+      formData.append('title', this.addBlogForm.get('title')?.value);
+      formData.append('content', this.addBlogForm.get('content')?.value);
+      formData.append(
+        'category',
+        JSON.stringify(this.addBlogForm.get('category')?.value)
+      );
+      formData.append(
+        'is_public',
+        this.addBlogForm.get('is_Public')?.value ? '1' : '0'
+      );
+
+      if (this.file) {
+        formData.append('image', this.file);
+      }
+      this.user.postBlog(formData).subscribe((data) => {
+        if (data.success) {
+          this.addBlogForm.reset();
+          this.openDialog();
+          this.router.navigate(['/user/blogs']);
+        } else {
+          console.log(data);
+        }
+      });
     }
   }
 

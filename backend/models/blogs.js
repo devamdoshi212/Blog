@@ -13,9 +13,11 @@ const blogSchema = new mongoose.Schema({
       required: true,
     },
   ],
-  comments: [
-    { type: mongoose.SchemaTypes.ObjectId, ref: "comments" },
-  ],
+  comments: [{ type: mongoose.SchemaTypes.ObjectId, ref: "comments" }],
+  image: {
+    public_id: { type: String, trim: true },
+    public_url: { type: String, trim: true },
+  },
   is_public: { type: Number, default: 1 },
   is_active: { type: Number, default: 1 },
 });

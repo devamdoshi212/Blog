@@ -14,21 +14,15 @@ export default (role: string) => {
     if (role == 'ADMIN') {
       return http.fetchGet('admin/verify').pipe(
         map((data) => {
-          if (data.success) {
-            return true;
-          } else {
-            return createUrlTreeFromSnapshot(route, ['/login']);
-          }
+          if (data.success) return true;
+          return createUrlTreeFromSnapshot(route, ['/login']);
         })
       );
     } else if (role == 'USER') {
       return http.fetchGet('user/verify').pipe(
         map((data) => {
-          if (data.success) {
-            return true;
-          } else {
-            return createUrlTreeFromSnapshot(route, ['/login']);
-          }
+          if (data.success) return true;
+          return createUrlTreeFromSnapshot(route, ['/login']);
         })
       );
     } else {

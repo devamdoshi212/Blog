@@ -37,7 +37,11 @@ router.post("/interest", asyncRouteHandler(addInterest));
 router.get("/interest", asyncRouteHandler(getInterests));
 router.delete("/interest/:id", asyncRouteHandler(removeInterest));
 
-router.post("/blog", asyncRouteHandler(createBlog));
+router.post(
+  "/blog",
+  multerConfig.single("image"),
+  asyncRouteHandler(createBlog)
+);
 router.get("/blog", asyncRouteHandler(getBlogs));
 router.get("/blog/:id", asyncRouteHandler(getSingleBlog));
 router.get("/blogpublic", asyncRouteHandler(getAllPublicBlogs));
