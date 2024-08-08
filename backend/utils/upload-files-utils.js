@@ -23,9 +23,16 @@ const multerConfig = multer({
 const uploadFile = async (fileBuffer, originalFileName, folder) => {
   try {
     const fileExt = path.extname(originalFileName);
-    const filePath = path.join('./public', `${Date.now()}${fileExt}`);
+
+    if (!fs.existsSync("./public")) {
+      fs.mkdir("./public");
+    }
+
+    const filePath = path.join("./public", `${Date.now()}${fileExt}`);
     await fs.writeFile(filePath, fileBuffer);
-    const result = await cloudinary.uploader.upload(filePath, { folder: folder });
+    const result = await cloudinary.uploader.upload(filePath, {
+      folder: folder,
+    });
     await fs.unlink(filePath);
     return result;
   } catch (error) {
